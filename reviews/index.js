@@ -6,6 +6,14 @@ const typeDefs = gql`
     reviews: [Review!]
   }
 
+  type Mutation {
+    createReview(userId: ID!, rating: Int!): CreateReviewPayload
+  }
+
+  type CreateReviewPayload {
+    review: Review!
+  }
+
   type Review @key(fields: "id") {
     id: ID!
     rating: Int!
@@ -19,6 +27,11 @@ const typeDefs = gql`
 `;
 
 const resolvers = {
+  Mutation: {
+    createReview(parent, args, context, info) {
+      return { review: { id: "1", rating: args.rating, userId: args.userId } }
+    }
+  },
   Query: {
     reviews() {
       return [{ id: "1", rating: 2, userId: 1 }]

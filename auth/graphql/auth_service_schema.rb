@@ -2,5 +2,5 @@ class AuthServiceSchema < GraphQL::Schema
   include ApolloFederation::Schema
 
   query QueryType
-  #mutation MutationType
+  mutation MutationType
 end
