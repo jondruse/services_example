@@ -9,11 +9,12 @@ const gateway = new ApolloGateway({
   // real usage-based metrics.
   serviceList: [
     { name: "auth", url: "http://localhost:4500/v1" },
-    { name: "reviews", url: "http://localhost:4001" }
+    { name: "reviews", url: "http://localhost:4001" },
+    { name: "social_data", url: "http://localhost:4002" },
   ],
 
   introspectionHeaders: {
-    Authorization: 'Bearer abc123'
+    Authorization: "Bearer abc123",
   },
   debug: true,
   // Experimental: Enabling this enables the query plan view in Playground.

@@ -6,7 +6,8 @@ class QueryType < GraphQL::Schema::Object
   def current_user
     {
       id: 1,
-      username: "Jon"
+      username: "Jon",
+      email: "jon@test.test"
     }
   end
 
