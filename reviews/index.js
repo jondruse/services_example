@@ -1,5 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server');
-const { buildFederatedSchema } = require('@apollo/federation');
+const { ApolloServer, gql } = require("apollo-server");
+const { buildFederatedSchema } = require("@apollo/federation");
 
 const typeDefs = gql`
   type Query {
@@ -34,32 +34,31 @@ const resolvers = {
   },
   Query: {
     reviews() {
-      return [{ id: "1", rating: 2, userId: 1 }]
-    }
+      return [{ id: "1", rating: 2, userId: 1 }];
+    },
   },
   User: {
     reviews(object) {
-      return [{ id: "1", rating: 2, userId: object.id }]
-    }
+      return [{ id: "1", rating: 2, userId: object.id }];
+    },
   },
   Review: {
-    __resolveReference(user){
-      return { id: 1, rating: 2, userId: user.id }
+    __resolveReference(user) {
+      return { id: 1, rating: 2, userId: user.id };
     },
-    user(object){
-      return { __typename: "User", id: object.userId }
-    }
-  }
-}
+    user(object) {
+      return { __typename: "User", id: object.userId };
+    },
+  },
+};
 
 const server = new ApolloServer({
   schema: buildFederatedSchema([{ typeDefs, resolvers }]),
-  context: params => () => {
+  context: (params) => () => {
     console.log(params.req.body.query);
-  }
+  },
 });
 
 server.listen(4001).then(({ url }) => {
-    console.log(`🚀 Server ready at ${url}`);
+  console.log(`🚀 Server ready at ${url}`);
 });
-
